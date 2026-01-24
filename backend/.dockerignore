@@ -1,0 +1,27 @@
+# --- Dependencias (CRÍTICO) ---
+# Ignoramos esto para que Docker instale sus propias dependencias linux
+# y no copie las de tu Windows/Mac que podrían romper el contenedor.
+node_modules
+npm-debug.log
+
+# --- Archivos de Build y Temporales ---
+dist
+build
+coverage
+
+# --- Control de Versiones y Sistema ---
+.git
+.gitignore
+.DS_Store
+.vscode
+.idea
+
+# --- Secretos y Entorno ---
+# Docker Compose inyectará esto en tiempo de ejecución.
+# No queremos quemar tus claves de Mailtrap/Google en la imagen.
+.env
+.env.*
+
+# --- Docker ---
+Dockerfile
+docker-compose.yml

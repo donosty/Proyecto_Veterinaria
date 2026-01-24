@@ -1,0 +1,54 @@
+services:
+  backend:
+    build:
+      context: ./backend
+      target: dev
+    container_name: backend-app
+    ports:
+      - "4000:4000"
+    env_file:
+      - ./backend/.env
+    environment:
+      - PORT=4000
+      - MONGO_URI=mongodb://mongo-db:27017/mi_base_datos
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
+    networks:
+      - mern-network
+    depends_on:
+      - mongo-db
+
+  frontend:
+    build:
+      context: ./frontend
+      target: dev
+    container_name: frontend-app
+    ports:
+      - "5173:5173"
+    env_file:
+      - ./frontend/.env
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    networks:
+      - mern-network
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+
+
+  mongo-db:
+    image: mongo:6.0
+    container_name: mongo-container
+    volumes:
+      - mongo_data:/data/db
+    ports:
+      - "27017:27017"
+    networks:
+      - mern-network
+
+volumes:
+  mongo_data:
+
+networks:
+  mern-network:        

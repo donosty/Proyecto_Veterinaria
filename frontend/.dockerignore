@@ -1,0 +1,27 @@
+# --- Dependencias (CRÍTICO) ---
+node_modules
+npm-debug.log
+yarn-error.log
+
+# --- Archivos de Build ---
+# Vite genera la carpeta 'dist', no queremos copiar la vieja,
+# queremos generar una nueva limpia en el stage de build.
+dist
+build
+coverage
+
+# --- Control de Versiones y Sistema ---
+.git
+.gitignore
+.DS_Store
+.vscode
+.idea
+
+# --- Secretos y Entorno ---
+.env
+.env.local
+.env.development
+.env.production
+
+# --- Docker ---
+Dockerfile
