@@ -1,0 +1,41 @@
+services:
+  backend:
+    build:
+      context: ./backend
+      target: prod
+    container_name: backend-app
+    ports:
+      - "4000:4000"
+    env_file:
+      - ./backend/.env
+    environment:
+      - PORT=4000
+      - MONGO_URI=mongodb://mongo-db:27017/mi_base_datos
+    depends_on:
+      - mongo-db
+    networks:
+      - mern-network
+
+  frontend:
+    build:
+      context: ./frontend
+      target: prod
+    container_name: frontend-app
+    ports:
+      - "80:80"
+    networks:
+      - mern-network
+
+  mongo-db:
+    image: mongo:6.0
+    container_name: mongo-container
+    volumes:
+      - mongo_data:/data/db
+    networks:
+      - mern-network
+
+volumes:
+  mongo_data:
+
+networks:
+  mern-network:
